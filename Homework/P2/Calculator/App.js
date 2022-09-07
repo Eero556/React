@@ -8,7 +8,7 @@ export default function App() {
   const [result, setResult] = useState('0');
 
   // button pressed - calculate
-  const buttonPressed = (calc) => {
+  const buttonPressed = (e,calc) => {
 
     if (calc === '+') setResult(parseInt(number1) + parseInt(number2) + "");
     else if (calc === '-') setResult(parseInt(number1) - parseInt(number2) + "");
@@ -27,7 +27,7 @@ export default function App() {
           <Text>Number 1:</Text>
         </View>
         <View style={styles.textInput}>
-          <TextInput onChangeText={text => setNumber1(text)} placeholder="0" style={{ textAlign: 'right' }} ></TextInput>
+          <TextInput keyboardType='numeric' onChangeText={text => setNumber1(text)} placeholder="0" style={{ textAlign: 'right' }} ></TextInput>
         </View>
       </View>
       <View style={styles.row}>
