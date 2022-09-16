@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, View, TextInput, Button, Keyboard } from 'react-native';
 import { useState } from 'react';
 
@@ -8,7 +7,7 @@ export default function App() {
   const [result, setResult] = useState('0');
 
   // button pressed - calculate
-  const buttonPressed = (e,calc) => {
+  const buttonPressed = (e, calc) => {
 
     if (calc === '+') setResult(parseInt(number1) + parseInt(number2) + "");
     else if (calc === '-') setResult(parseInt(number1) - parseInt(number2) + "");
@@ -35,14 +34,14 @@ export default function App() {
           <Text>Number 2:</Text>
         </View>
         <View style={styles.textInput}>
-          <TextInput onChangeText={text => setNumber2(text)} placeholder="0" style={{ textAlign: 'right' }} ></TextInput>
+          <TextInput keyboardType='numeric' onChangeText={text => setNumber2(text)} placeholder="0" style={{ textAlign: 'right' }} ></TextInput>
         </View>
       </View>
       <View style={styles.buttonRow}>
-        <Button color={"red"} onPress={() => buttonPressed( "+")} title="  +  " />
-        <Button color={"red"} onPress={() => buttonPressed( "-")} title="  -  " />
-        <Button color={"red"} onPress={() => buttonPressed( "*")} title="  *  " />
-        <Button color={"red"} onPress={() => buttonPressed( "/")} title="  /  " />
+        <Button color={"red"} title="  +  " onPress={(e) => buttonPressed(e, '+')} />
+        <Button color={"red"} title="  -  " onPress={(e) => buttonPressed(e, '-')} />
+        <Button color={"red"} title="  *  " onPress={(e) => buttonPressed(e, '*')} />
+        <Button color={"red"} title="  /  " onPress={(e) => buttonPressed(e, '/')} />
       </View>
       <View style={styles.row}>
         <View style={styles.text}>
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
-    
+
   },
   textInput: {
     justifyContent: 'center',
@@ -85,8 +84,8 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     marginTop: 5,
-    
-    
+
+
   },
   buttonRow: {
     flexDirection: 'row',
