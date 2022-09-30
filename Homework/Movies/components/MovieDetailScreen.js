@@ -3,11 +3,11 @@ import {
   Text,
   View,
   Image,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
 
 export default function MovieDetailScreen(props) {
 
@@ -25,13 +25,12 @@ export default function MovieDetailScreen(props) {
   }, []);
 
 
-
-
-
-
   let IMAGEPATH = 'http://image.tmdb.org/t/p/w500';
   let imageurl = IMAGEPATH + movie.backdrop_path;
 
+
+
+  
 
   const itemPressed = (key) => {
     props.navigation.navigate(
@@ -39,18 +38,19 @@ export default function MovieDetailScreen(props) {
       youtubekey: key
     }
     );
-    
+
   }
 
   return (
-    <View>
+    <ScrollView>
       <Image source={{ uri: imageurl }} style={styles.image} />
       <Text style={styles.title}>{movie.title}</Text>
       <Text style={styles.text}>{movie.release_date}</Text>
       <Text style={styles.text}>{movie.overview}</Text>
+      <Text>{moviedetail.runtime + " " + "Min"}</Text>
       <Text onPress={_ => itemPressed(moviedetail.videos.results[0].key)} style={styles.video}>Watch Trailer Here!</Text>
 
-    </View>
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     flexWrap: 'wrap'
   },
-  video:{
+  video: {
     color: "blue"
   }
 });

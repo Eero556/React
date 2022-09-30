@@ -14,12 +14,12 @@ const MovielistItem = (props) => {
 
     const [movie, setMovie] = useState([])
 
-    useEffect(() => {
-        const getData = async () => {
-            const { data } = await axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=79f98bb449c9a0eb366576882d49539b&append_to_response=videos');
-            setMovie(data);
+    const getData = async () => {
+        const { data } = await axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=79f98bb449c9a0eb366576882d49539b&append_to_response=videos');
+        setMovie(data);
+    };
 
-        };
+    useEffect(() => {
         getData();
     }, []);
 
@@ -30,7 +30,6 @@ const MovielistItem = (props) => {
             genres += movie.genres[i].name + " ";
         }
     }
-    // get first youtube video
     
 
     return (
@@ -41,7 +40,7 @@ const MovielistItem = (props) => {
             <View style={{ marginRight: 50 }}>
                 <Text style={styles.movieItemTitle}>{props.movie.title}</Text>
                 <Text style={styles.movieItemText}>{props.movie.release_date}</Text>
-                <Text numberOfLines={6} ellipsizeMode="tail" style={styles.movieItemText}>{props.movie.overview}</Text>
+                <Text numberOfLines={6} ellipsizeMode="tail" style={styles.movieItemText}>{movie.runtime+ " " + "Min"}</Text>
                 <Text>{genres}</Text>
             </View>
         </View>
