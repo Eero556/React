@@ -17,7 +17,6 @@ const Movielist = (props) => {
         getData();
     }, []);
 
-
     if (movies.length === 0) {
         return (
             <View style={{ flex: 1, padding: 20 }}>
@@ -25,9 +24,9 @@ const Movielist = (props) => {
             </View>
         )
     }
+    console.log(movies)
 
     const itemPressed = (index) => {
-        //alert(index);
         props.navigation.navigate(
             'MovieDetails',
             { movie: movies[index] });
@@ -37,7 +36,7 @@ const Movielist = (props) => {
     let movieItems = movies.map((movie, index) => {
         return (
             <TouchableHighlight onPress={_ => itemPressed(index)}>
-                <MovielistItem movie={movie} key={index} />
+                <MovielistItem movie={movie} key={movie.id} />
             </TouchableHighlight>
 
         )

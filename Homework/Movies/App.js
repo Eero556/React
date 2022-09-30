@@ -13,6 +13,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Trailer from './components/Trailer';
 const Stack = createNativeStackNavigator();
 const App: () => Node = () => {
   return (
@@ -27,6 +28,11 @@ const App: () => Node = () => {
         name="MovieDetails" 
         component={MovieDetailScreen} 
         options={{ title: 'MovieDetails' }}
+        />
+        <Stack.Screen
+          name="Trailer"
+          component={Trailer}
+          options={{ title: 'Trailer' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
