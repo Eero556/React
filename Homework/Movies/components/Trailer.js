@@ -2,20 +2,19 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import YoutubePlayer from 'react-native-youtube-iframe'
+
 const Trailer = (props) => {
-    const { route } = props;
-    const { movie } = route.params;
+    const [playing, setPlaying] = useState(true);
 
-    console.log(movie)
+    const videoID = props.route.params.youtubekey
+    console.log(videoID)
+   
 
-
-    let IMAGEPATH = 'http://image.tmdb.org/t/p/w500';
-    let imageurl = IMAGEPATH + props.poster_path;
-    // id from array
 
     return (
         <View>
-            <Text onPress={_ => videofunc}>Trailer</Text>
+            <YoutubePlayer playing={playing} videoId={videoID} height={300}/>
         </View>
     )
 }

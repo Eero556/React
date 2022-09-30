@@ -8,11 +8,12 @@ import { useState, useEffect } from 'react';
 const MovielistItem = (props) => {
 
     let IMAGEPATH = 'http://image.tmdb.org/t/p/w500';
-    let imageurl = IMAGEPATH + props.poster_path;
+    let imageurl = IMAGEPATH + props.movie.poster_path;
     // id from array
     const id = props.movie.id
 
     const [movie, setMovie] = useState([])
+
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=79f98bb449c9a0eb366576882d49539b&append_to_response=videos');
@@ -29,21 +30,9 @@ const MovielistItem = (props) => {
             genres += movie.genres[i].name + " ";
         }
     }
-
-    const videoPressed = (key) => {
-        console.log(key)
-       
-    }
-
-    const itemPressed = (index) => {
-        props.navigation.navigate(
-            'Trailer',
-            { movie: movies[index] });
-    }
-
-
-
+    // get first youtube video
     
+
     return (
         <View style={styles.movieItem}>
             <View style={styles.movieItemImage}>
@@ -54,7 +43,6 @@ const MovielistItem = (props) => {
                 <Text style={styles.movieItemText}>{props.movie.release_date}</Text>
                 <Text numberOfLines={6} ellipsizeMode="tail" style={styles.movieItemText}>{props.movie.overview}</Text>
                 <Text>{genres}</Text>
-                <Text onPress={_ => videoPressed(index)}>Juu</Text>
             </View>
         </View>
     )

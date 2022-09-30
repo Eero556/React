@@ -24,7 +24,6 @@ const Movielist = (props) => {
             </View>
         )
     }
-    console.log(movies)
 
     const itemPressed = (index) => {
         props.navigation.navigate(
@@ -32,11 +31,10 @@ const Movielist = (props) => {
             { movie: movies[index] });
     }
 
-
     let movieItems = movies.map((movie, index) => {
         return (
             <TouchableHighlight onPress={_ => itemPressed(index)}>
-                <MovielistItem movie={movie} key={movie.id} />
+                <MovielistItem movie={movie} key={index} />
             </TouchableHighlight>
 
         )
