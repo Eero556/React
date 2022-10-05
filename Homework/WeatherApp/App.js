@@ -2,11 +2,11 @@
 import React from 'react';
 import { useState } from 'react';
 import type { Node } from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView } from 'react-native';
 import Dialog from "react-native-dialog";
 import { Header, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import WeatherForecast from './Components/weathercard';
+import WeatherForecast from './WeatherForecast';
 
 
 const App: () => Node = () => {
@@ -25,22 +25,31 @@ const App: () => Node = () => {
     setCities([...cities, { id: Math.random(), name: cityName }]);
     setModalVisible(false);
   }
-  
+
+  const deleteCity = (deleteCity) => {
+    let filteredArray = cities.filter(city => city.id !== deleteCity.id);
+    setCities(filteredArray);
+  }
+
   return (
     <SafeAreaView>
       <Header
         centerComponent={{ text: 'Weather App', style: { color: '#fff' } }}
         rightComponent={{ icon: 'add', color: '#fff', onPress: openDialog }}
       />
-      {cities.map((city) => (
-        <WeatherForecast key={city.id} city={city}/>
-      ))}
+      <ScrollView>
+        {cities.map((city) => (
+          <WeatherForecast key={city.id} city={city} deleteCity={deleteCity} />
+        ))}
+      </ScrollView>
+
       <Dialog.Container visible={modalVisible}>
         <Dialog.Title>Add a new city</Dialog.Title>
         <View>
           <Input
             onChangeText={(text) => setCityName(text)}
             placeholder='Type cityname here'
+            keyboardType='text'
           />
         </View>
         <Dialog.Button label="Cancel" onPress={cancelCity} />
