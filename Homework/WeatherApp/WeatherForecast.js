@@ -29,12 +29,12 @@ const WeatherForecast = (params) => {
     const refreshForecast = () => {
         refetch();
     }
-    console.log(city.id)
+
 
     const deleteCity = () => {
         params.deleteCity(city.id);
     }
-    
+
 
     return (
         <Card>
@@ -47,8 +47,11 @@ const WeatherForecast = (params) => {
                 <Text>Min-Max: {data.main.temp_min} - {data.main.temp_max}</Text>
                 <Image style={styles.img} source={{ uri: ICON_URL + data.weather[0].icon + '.png' }}
                 />
-                <Button onPress={refreshForecast} title={"Refresh"}></Button>
-                <Button onPress={deleteCity} title={"Delete"}></Button>
+                <View style={styles.buttonContainer}>
+                    <Button onPress={refreshForecast} title={"Refresh"}></Button>
+                    <Button onPress={deleteCity} title={"Delete"}></Button>
+                </View>
+
             </View>
         </Card>
     )
@@ -59,13 +62,15 @@ const styles = StyleSheet.create({
         height: 60,
 
     },
-    text: {
-
-    },
     container: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
 
+    },
+    buttonContainer:{
+        width: 550,
+        flexDirection: "row",
+        justifyContent: "space-around"
     }
 })
 
