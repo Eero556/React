@@ -8,12 +8,15 @@ import { Header, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import WeatherForecast from './WeatherForecast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import axios from 'axios';
 const App: () => Node = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [cityName, setCityName] = useState("");
   const [cities, setCities] = useState([]);
 
+  
+
+  
   const openDialog = () => {
     setModalVisible(true);
   }
