@@ -8,6 +8,7 @@ import { FAB } from "react-native-paper"
 import Dialog from "react-native-dialog"
 import { Input } from "react-native-elements"
 import axios from "axios"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function App() {
 
   
@@ -32,9 +33,43 @@ export default function App() {
     setCities([...cities, { id: data[0].place_id, name: cityName, desc: cityDesc, lat: Number(data[0].lat), lon: Number(data[0].lon) }]);
     setModalVisible(false);
   }
-  console.log(cities)
+  
+
+  //storage
+
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('@cities', JSON.stringify(cities));
+    } catch (e) {
+      // saving error
+      console.log("Cities saving error!");
+    }
+  }
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@cities')
+      if (value !== null) {
+        setCities(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log("Cities loading error!");
+    }
+  }
+
+   // load cities when app starts
+   useEffect(() => {
+    getData();
+  }, []);
+
+  // save cities if cities state changes
+  useEffect(() => {
+    storeData();
+  }, [cities]);
 
 
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +81,7 @@ export default function App() {
         longitudeDelta: 0.05
       }}>
       {cities.map((city) => (
-            <Marker title={city.name} description={city.desc} key={city.id}  coordinate={{latitude: city.lat, longitude: city.lon}}/>
+            <Marker  title={city.name} description={city.desc} key={city.id}  coordinate={{latitude: city.lat, longitude: city.lon}}/>
           ))}
 
       </MapView>
