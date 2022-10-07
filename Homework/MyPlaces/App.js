@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    width: 500,
+    height: 1000
   },
   fab: {
     position: "absolute",
