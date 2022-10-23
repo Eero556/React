@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovielistItem from './MovielistItem';
 
+
 const Movielist = (props) => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("")
@@ -60,7 +61,8 @@ const Movielist = (props) => {
 
     return (
         <ScrollView>
-            <View>
+            
+            <View style={styles.container}>
                 <Button title='search' onPress={searchMovie} />
                 <TextInput onChangeText={quary => { setSearch(quary) }} />
             </View>
@@ -71,9 +73,16 @@ const Movielist = (props) => {
 }
 
 const styles = StyleSheet.create({
-    textInput: {
-
-    }
-})
+    container: {
+      marginTop: 30,
+      padding: 2,
+    },
+    item: {
+      backgroundColor: "#f5f520",
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
+    },
+  });
 
 export default Movielist
