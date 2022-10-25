@@ -7,10 +7,10 @@ import icon from "react-native-vector-icons/FontAwesome"
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Movielist = (props) => {
+
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("")
     let [url, seturl] = useState("https://api.themoviedb.org/3/movie/popular?api_key=79f98bb449c9a0eb366576882d49539b&append_to_response=videos")
-
     const getData = async () => {
         const data = await axios.get(url);
         setMovies(data.data.results);
@@ -59,7 +59,7 @@ const Movielist = (props) => {
         <ScrollView>
             <View style={styles.container}>
                 <TextInput style={styles.input} onChangeText={quary => { setSearch(quary) }}></TextInput>
-                <Icon style={styles.icon} onPress={searchMovie} name='search' size={30}/>
+                <Icon style={styles.icon} onPress={searchMovie} name='search' size={30} />
             </View>
             {movieItems}
         </ScrollView>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: 350
     },
-    icon:{
+    icon: {
         marginTop: 10,
         paddingLeft: 5
     }
