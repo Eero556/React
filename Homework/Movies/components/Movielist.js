@@ -3,7 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovielistItem from './MovielistItem';
-
+import icon from "react-native-vector-icons/FontAwesome"
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Movielist = (props) => {
     const [movies, setMovies] = useState([]);
@@ -18,15 +19,7 @@ const Movielist = (props) => {
         getData();
     }, []);
 
-
-    if (movies.length === 0) {
-        return (
-            <View style={{ flex: 1, padding: 20 }}>
-                <Text>Loading, please wait...</Text>
-            </View>
-        )
-    }
-
+    // go to moviedetails
     const itemPressed = (index) => {
         props.navigation.navigate(
             'MovieDetails',
@@ -35,9 +28,9 @@ const Movielist = (props) => {
 
     let movieItems = movies.map((movie, index) => {
         return (
-            <View>
+            <View key={index}>
                 <TouchableHighlight onPress={_ => itemPressed(index)}>
-                    <MovielistItem movie={movie} key={index} />
+                    <MovielistItem movie={movie} />
                 </TouchableHighlight>
             </View>
 
@@ -47,26 +40,27 @@ const Movielist = (props) => {
     // Search movies
 
     const searchMovie = async () => {
+
         try {
+            if (search.length <= 0) {
+                getData()
+            }
             let wantedMovies = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=79f98bb449c9a0eb366576882d49539b&query=${search}`)
             setMovies(wantedMovies.data.results)
 
         } catch (e) {
-            getData()
+            console.log(e)
         }
 
     }
 
 
-
     return (
         <ScrollView>
-            
             <View style={styles.container}>
-                <Button title='search' onPress={searchMovie} />
-                <TextInput onChangeText={quary => { setSearch(quary) }} />
+                <TextInput style={styles.input} onChangeText={quary => { setSearch(quary) }}></TextInput>
+                <Icon style={styles.icon} onPress={searchMovie} name='search' size={30}/>
             </View>
-            
             {movieItems}
         </ScrollView>
     )
@@ -74,15 +68,22 @@ const Movielist = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-      marginTop: 30,
-      padding: 2,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: "center"
     },
-    item: {
-      backgroundColor: "#f5f520",
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
+    input: {
+        backgroundColor: "#fff",
+        padding: 10,
+        borderRadius: 10,
+        color: "#000",
+        borderWidth: 1,
+        width: 350
     },
-  });
+    icon:{
+        marginTop: 10,
+        paddingLeft: 5
+    }
+});
 
 export default Movielist
