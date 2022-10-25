@@ -37,7 +37,7 @@ const Movielist = (props) => {
 
         )
     });
-    // Search movies
+    // Search moviess
 
     const searchMovie = async () => {
 
