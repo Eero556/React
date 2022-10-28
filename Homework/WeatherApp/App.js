@@ -80,6 +80,7 @@ const App: () => Node = () => {
           {cities.map((city) => (
             <WeatherForecast key={city.id} city={city} deleteCity={deleteCity} />
           ))}
+          
         </ScrollView>
       
 
