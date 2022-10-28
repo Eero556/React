@@ -3,14 +3,13 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovielistItem from './MovielistItem';
-import icon from "react-native-vector-icons/FontAwesome"
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import api_key from "../apikey"
 const Movielist = (props) => {
 
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("")
-    let [url, seturl] = useState("https://api.themoviedb.org/3/movie/popular?api_key=79f98bb449c9a0eb366576882d49539b&append_to_response=videos")
+    let [url, seturl] = useState("https://api.themoviedb.org/3/movie/popular?api_key="+api_key + "&append_to_response=videos")
     const getData = async () => {
         const data = await axios.get(url);
         setMovies(data.data.results);

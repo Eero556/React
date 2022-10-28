@@ -3,11 +3,12 @@ import React from 'react'
 import { Card, Button } from 'react-native-elements';
 import useAxios from 'axios-hooks';
 import { create } from 'react-test-renderer';
+import API_KEY from './apikey';
 const WeatherForecast = (params) => {
     //Use props
     const city = params.city
 
-    const API_KEY = 'c59ff511240b68cb67f79ce98f9a17f7';
+    
     const URL = 'https://api.openweathermap.org/data/2.5/weather?q=';
     const ICON_URL = 'http://openweathermap.org/img/wn/';
 

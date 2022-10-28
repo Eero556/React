@@ -31,7 +31,7 @@ local.properties
 *.iml
 *.hprof
 .cxx/
-
+apikey.js
 # node.js
 #
 node_modules/
