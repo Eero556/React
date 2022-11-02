@@ -1,6 +1,7 @@
 package com.calendarnativemodule; // replace com.your-app-name with your app’s name
 import android.util.Log;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -23,8 +24,15 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void createCalendarEvent(String name, String location) {
+    public void createCalendarEvent(String name, String location, Callback callback) {
         Log.d("CalendarModule", "Create event called with name: " + name
                 + " and location: " + location);
+
+        Integer eventId = 1;
+
+        callback.invoke(eventId);
     }
+
+
+
 }
